@@ -95,13 +95,15 @@ export function ConversionForm({className, user, ...props}: ConversionFormProps)
               <div className="grid gap-6">
                 <div className="grid gap-3">
                   <Label htmlFor="currency">Moeda</Label>
-                  <Select name="currency">
+                  <Select name="currency" required>
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Moeda"/>
                     </SelectTrigger>
                     <SelectContent>
                       {currencies.map((currency) => (
-                        <SelectItem value={currency}>{currency.toUpperCase()}</SelectItem>
+                        <SelectItem value={currency} key={currency}>
+                          {currency.toUpperCase()}
+                        </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
