@@ -4,7 +4,14 @@ import {authOptions} from "@/auth";
 import {SidebarInset, SidebarProvider, SidebarTrigger} from "@/components/ui/sidebar";
 import {AppSidebar} from "@/components/app-sidebar";
 import {Separator} from "@/components/ui/separator";
-import {Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage} from "@/components/ui/breadcrumb";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator
+} from "@/components/ui/breadcrumb";
 import prisma from "@/lib/prisma";
 import {notFound} from "next/navigation";
 import {ConversionView} from "@/components/conversion-view";
@@ -32,9 +39,15 @@ export default async function Conversion({params}: { params: Promise<{ id: strin
             />
             <Breadcrumb>
               <BreadcrumbList>
+                <BreadcrumbItem className="hidden md:block">
+                  <BreadcrumbLink href="/">
+                    Conversão de Moedas
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator className="hidden md:block"/>
                 <BreadcrumbItem>
                   <BreadcrumbPage>
-                    Conversão de Moedas
+                    {conversion.currency.toUpperCase()}
                   </BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
