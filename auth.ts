@@ -29,7 +29,7 @@ export const authOptions = {
               email: credentials.email,
               password: await bcrypt.hash(credentials.password, 10),
             },
-          });
+          }) as any;
         }
 
         const isCorrectPassword = await bcrypt.compare(
@@ -41,7 +41,7 @@ export const authOptions = {
           throw new Error("Invalid credentials");
         }
 
-        return user;
+        return user as any;
       },
     }),
   ],
