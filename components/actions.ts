@@ -1,9 +1,10 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { redirect } from "next/navigation";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/auth";
+import {redirect} from "next/navigation";
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/auth";
+import {revalidatePath} from "next/cache";
 
 export async function createConversion(formData: FormData) {
   const session = await getServerSession(authOptions);
@@ -28,5 +29,6 @@ export async function createConversion(formData: FormData) {
     }
   });
 
+  revalidatePath(`/conversion/${conversion.id}`);
   redirect(`/conversion/${conversion.id}`);
 }
