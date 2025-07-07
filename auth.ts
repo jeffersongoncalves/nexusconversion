@@ -1,5 +1,4 @@
 import CredentialsProvider from "next-auth/providers/credentials";
-import { type NextAuthOptions } from "next-auth";
 import prisma from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 
@@ -8,17 +7,19 @@ export const authOptions = {
     CredentialsProvider({
       name: "credentials",
       credentials: {
-        email: { label: "Email", type: "email" },
-        name: { label: "Name", type: "name" },
-        password: { label: "Password", type: "password" },
+        id: {label: "Id", type: "id"},
+        email: {label: "Email", type: "email"},
+        name: {label: "Name", type: "name"},
+        password: {label: "Password", type: "password"},
       },
-      async authorize(credentials) {
+      async authorize(credentials, req) {
+        if (!credentials) return null;
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Invalid credentials");
         }
 
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
+          where: {email: credentials.email},
         });
 
         if (!user) {
@@ -48,11 +49,11 @@ export const authOptions = {
     signIn: "/login",
   },
   callbacks: {
-    async jwt({ token, user }) {
-      return { ...token, id: token.id ?? user?.id };
+    async jwt({token, user}) {
+      return {...token, id: token.id ?? user?.id};
     },
-    async session({ session, token }) {
-      return { ...session, user: { ...session.user, id: token.id } };
+    async session({session, token}) {
+      return {...session, user: {...session.user, id: token.id}};
     },
   },
 }
