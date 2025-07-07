@@ -7,13 +7,11 @@ export const authOptions = {
     CredentialsProvider({
       name: "credentials",
       credentials: {
-        id: {label: "Id", type: "id"},
         email: {label: "Email", type: "email"},
         name: {label: "Name", type: "name"},
         password: {label: "Password", type: "password"},
       },
       async authorize(credentials, req) {
-        if (!credentials) return null;
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Invalid credentials");
         }
