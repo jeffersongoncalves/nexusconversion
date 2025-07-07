@@ -7,17 +7,13 @@ import {Separator} from "@/components/ui/separator";
 import {Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage} from "@/components/ui/breadcrumb";
 import prisma from "@/lib/prisma";
 import {notFound} from "next/navigation";
+import {ConversionView} from "@/components/conversion-view";
 
 export default async function Conversion({params}: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   const {id} = await params;
   const conversionId = parseInt(id);
-  const conversion = await prisma.convertion.findUnique({
-    where: {id: conversionId},
-    include: {
-      user: true,
-    },
-  });
+  const conversion = await prisma.convertion.findUnique({where: {id: conversionId}});
 
   if (!conversion) {
     notFound();
@@ -46,7 +42,13 @@ export default async function Conversion({params}: { params: Promise<{ id: strin
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-
+          <ConversionView convertion={{
+            id: conversion.id,
+            currency: conversion.currency,
+            value: conversion.value.toNumber(),
+            value_usd: conversion.value_usd.toNumber(),
+            value_brl: conversion.value_brl.toNumber()
+          }}/>
         </div>
       </SidebarInset>
     </SidebarProvider>
