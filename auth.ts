@@ -21,13 +21,19 @@ export const authOptions = {
         });
 
         if (!user) {
-          return await prisma.user.create({
+          const newUser = await prisma.user.create({
             data: {
               name: credentials.name ?? credentials.email,
               email: credentials.email,
               password: await bcrypt.hash(credentials.password, 10),
             },
-          }) as any;
+          });
+
+          return {
+            id: newUser.id,
+            name: newUser.name,
+            email: newUser.email,
+          } as any;
         }
 
         const isCorrectPassword = await bcrypt.compare(
@@ -39,7 +45,11 @@ export const authOptions = {
           throw new Error("Invalid credentials");
         }
 
-        return user as any;
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+        } as any;
       },
     }),
   ],
