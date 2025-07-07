@@ -37,7 +37,7 @@ export async function ConversionList({className, user, ...props}: ConversionList
           </TableHeader>
           <TableBody>
             {convertions.map((convertion) => (
-              <TableRow>
+              <TableRow key={convertion.id}>
                 <TableCell className="font-medium">
                   {convertion.currency.toUpperCase()}
                 </TableCell>

@@ -5,6 +5,7 @@ import {SidebarInset, SidebarProvider, SidebarTrigger} from "@/components/ui/sid
 import {AppSidebar} from "@/components/app-sidebar";
 import {Separator} from "@/components/ui/separator";
 import {Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage} from "@/components/ui/breadcrumb";
+import {ConversionList} from "@/components/crypcurrency-list";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -32,7 +33,7 @@ export default async function Home() {
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-
+          <ConversionList user={session.user}/>
         </div>
       </SidebarInset>
     </SidebarProvider>
