@@ -19,6 +19,70 @@ interface ConversionFormProps extends React.ComponentProps<"div"> {
 }
 
 export function ConversionForm({className, user, ...props}: ConversionFormProps) {
+  const currencies = [
+    "btc",
+    "eth",
+    "ltc",
+    "bch",
+    "bnb",
+    "eos",
+    "xrp",
+    "xlm",
+    "link",
+    "dot",
+    "yfi",
+    "usd",
+    "aed",
+    "ars",
+    "aud",
+    "bdt",
+    "bhd",
+    "bmd",
+    "brl",
+    "cad",
+    "chf",
+    "clp",
+    "cny",
+    "czk",
+    "dkk",
+    "eur",
+    "gbp",
+    "gel",
+    "hkd",
+    "huf",
+    "idr",
+    "ils",
+    "inr",
+    "jpy",
+    "krw",
+    "kwd",
+    "lkr",
+    "mmk",
+    "mxn",
+    "myr",
+    "ngn",
+    "nok",
+    "nzd",
+    "php",
+    "pkr",
+    "pln",
+    "rub",
+    "sar",
+    "sek",
+    "sgd",
+    "thb",
+    "try",
+    "twd",
+    "uah",
+    "vef",
+    "vnd",
+    "zar",
+    "xdr",
+    "xag",
+    "xau",
+    "bits",
+    "sats"
+  ];
   return (
     <div className="flex flex-col items-center w-full">
       <div className={cn("flex flex-col gap-6 w-full max-w-lg", className)} {...props}>
@@ -36,67 +100,9 @@ export function ConversionForm({className, user, ...props}: ConversionFormProps)
                       <SelectValue placeholder="Moeda"/>
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="btc">BTC</SelectItem>
-                      <SelectItem value="eth">ETH</SelectItem>
-                      <SelectItem value="ltc">LTC</SelectItem>
-                      <SelectItem value="bch">BCH</SelectItem>
-                      <SelectItem value="bnb">BNB</SelectItem>
-                      <SelectItem value="eos">EOS</SelectItem>
-                      <SelectItem value="xrp">XRP</SelectItem>
-                      <SelectItem value="xlm">XLM</SelectItem>
-                      <SelectItem value="link">LINK</SelectItem>
-                      <SelectItem value="dot">DOT</SelectItem>
-                      <SelectItem value="yfi">YFI</SelectItem>
-                      <SelectItem value="sol">SOL</SelectItem>
-                      <SelectItem value="aed">AED</SelectItem>
-                      <SelectItem value="ars">ARS</SelectItem>
-                      <SelectItem value="aud">AUD</SelectItem>
-                      <SelectItem value="bdt">BDT</SelectItem>
-                      <SelectItem value="bhd">BHD</SelectItem>
-                      <SelectItem value="bmd">BMD</SelectItem>
-                      <SelectItem value="brl">BRL</SelectItem>
-                      <SelectItem value="cad">CAD</SelectItem>
-                      <SelectItem value="chf">CHF</SelectItem>
-                      <SelectItem value="clp">CLP</SelectItem>
-                      <SelectItem value="cny">CNY</SelectItem>
-                      <SelectItem value="czk">CZK</SelectItem>
-                      <SelectItem value="dkk">DKK</SelectItem>
-                      <SelectItem value="gbp">GBP</SelectItem>
-                      <SelectItem value="gel">GEL</SelectItem>
-                      <SelectItem value="hkd">HKD</SelectItem>
-                      <SelectItem value="huf">HUF</SelectItem>
-                      <SelectItem value="idr">IDR</SelectItem>
-                      <SelectItem value="ils">ILS</SelectItem>
-                      <SelectItem value="inr">INR</SelectItem>
-                      <SelectItem value="jpy">JPY</SelectItem>
-                      <SelectItem value="krw">KRW</SelectItem>
-                      <SelectItem value="kwd">KWD</SelectItem>
-                      <SelectItem value="lkr">LKR</SelectItem>
-                      <SelectItem value="mmk">MMK</SelectItem>
-                      <SelectItem value="mxn">MXN</SelectItem>
-                      <SelectItem value="myr">MYR</SelectItem>
-                      <SelectItem value="ngn">NGN</SelectItem>
-                      <SelectItem value="nok">NOK</SelectItem>
-                      <SelectItem value="nzd">NZD</SelectItem>
-                      <SelectItem value="php">PHP</SelectItem>
-                      <SelectItem value="pkr">PKR</SelectItem>
-                      <SelectItem value="pln">PLN</SelectItem>
-                      <SelectItem value="rub">RUB</SelectItem>
-                      <SelectItem value="sar">SAR</SelectItem>
-                      <SelectItem value="sek">SEK</SelectItem>
-                      <SelectItem value="sgd">SGD</SelectItem>
-                      <SelectItem value="thb">THB</SelectItem>
-                      <SelectItem value="try">TRY</SelectItem>
-                      <SelectItem value="twd">TWD</SelectItem>
-                      <SelectItem value="uah">UAH</SelectItem>
-                      <SelectItem value="vef">VEF</SelectItem>
-                      <SelectItem value="vnd">VND</SelectItem>
-                      <SelectItem value="zar">ZAR</SelectItem>
-                      <SelectItem value="xdr">XDR</SelectItem>
-                      <SelectItem value="xag">XAG</SelectItem>
-                      <SelectItem value="xau">XAU</SelectItem>
-                      <SelectItem value="bits">BITS</SelectItem>
-                      <SelectItem value="sats">SATS</SelectItem>
+                      {currencies.map((currency) => (
+                        <SelectItem value={currency}>{currency.toUpperCase()}</SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </div>
