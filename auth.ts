@@ -55,4 +55,4 @@ export const authOptions = {
       return { ...session, user: { ...session.user, id: token.id } };
     },
   },
-} satisfies NextAuthOptions;
+}

@@ -5,10 +5,23 @@ import {SidebarInset, SidebarProvider, SidebarTrigger} from "@/components/ui/sid
 import {AppSidebar} from "@/components/app-sidebar";
 import {Separator} from "@/components/ui/separator";
 import {Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage} from "@/components/ui/breadcrumb";
-import {ConversionForm} from "@/components/conversion-form";
+import prisma from "@/lib/prisma";
+import {notFound} from "next/navigation";
 
-export default async function Home() {
+export default async function Conversion({params}: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
+  const {id} = await params;
+  const conversionId = parseInt(id);
+  const conversion = await prisma.convertion.findUnique({
+    where: {id: conversionId},
+    include: {
+      user: true,
+    },
+  });
+
+  if (!conversion) {
+    notFound();
+  }
   return (
     <SidebarProvider>
       <AppSidebar user={session.user}/>
@@ -33,7 +46,7 @@ export default async function Home() {
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          <ConversionForm user={session.user}/>
+
         </div>
       </SidebarInset>
     </SidebarProvider>

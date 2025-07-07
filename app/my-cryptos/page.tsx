@@ -5,7 +5,6 @@ import {SidebarInset, SidebarProvider, SidebarTrigger} from "@/components/ui/sid
 import {AppSidebar} from "@/components/app-sidebar";
 import {Separator} from "@/components/ui/separator";
 import {Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage} from "@/components/ui/breadcrumb";
-import {ConversionForm} from "@/components/conversion-form";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -25,7 +24,7 @@ export default async function Home() {
               <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbPage>
-                    Conversão de Moedas
+                    Minhas moedas
                   </BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
@@ -33,7 +32,7 @@ export default async function Home() {
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          <ConversionForm user={session.user}/>
+
         </div>
       </SidebarInset>
     </SidebarProvider>
