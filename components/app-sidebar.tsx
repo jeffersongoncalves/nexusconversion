@@ -25,7 +25,7 @@ const data = {
         },
         {
             title: "Minhas Conversões",
-            url: "/",
+            url: "/my-convertions",
             icon: ChartCandlestick,
         },
         {
